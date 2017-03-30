@@ -1,8 +1,4 @@
-<html>
-<head>
-</head>
-<body>
-<h2>Welcome to Demoland!</h2>
+##Welcome to Demoland!
 <!-- agent.ai chat widget begin -->
         <script id="user-care-script" type="text/javascript" src="https://webclient.agent.ai/js/agentai.js"></script>
         <script>
@@ -14,5 +10,3 @@
             });
         </script>
 <!-- agent.ai chat widget end -->
-</body>
-</html>
