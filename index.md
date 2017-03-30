@@ -3,8 +3,7 @@
 ## Note the Agent.ai Chat Widget in the lower right-hand corner
 <body>
 <!-- agent.ai chat widget begin -->
-        <script id="user-care-script" type="text/javascript" src="https://webclient.agent.ai/js/agentai.js"></script>
-        <script>
+        <script id="user-care-script" type="text/javascript" src="https://webclient.agent.ai/js/agentai.js">
             AgentAI.initialize({
                 'app_id': 'udvlVlwJLtdfGpuFvelhqw',
                 'api_key': 'AHTN65UUJVE4Q0002UPWNPOZ262FC3DAWLS2KJH3XE',
