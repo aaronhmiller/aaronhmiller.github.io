@@ -1,4 +1,6 @@
 ##Welcome to Demoland!
+
+###Note the Agent.ai Chat Widget in the lower right-hand corner
 <!-- agent.ai chat widget begin -->
         <script id="user-care-script" type="text/javascript" src="https://webclient.agent.ai/js/agentai.js"></script>
         <script>
