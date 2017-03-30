@@ -2,7 +2,7 @@
 <head>
 </head>
 <body>
-<h2>Hello There!</h2>
+<h2>Welcome to Demoland!</h2>
 <!-- agent.ai chat widget begin -->
         <script id="user-care-script" type="text/javascript" src="https://webclient.agent.ai/js/agentai.js"></script>
         <script>
