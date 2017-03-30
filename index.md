@@ -4,7 +4,7 @@
 <html>
 <body>
 <!-- agent.ai chat widget begin -->
-        <script id="user-care-script" type="text/javascript" src="https://webclient.agent.ai/js/agentai.js"></script>
+        <script id="user-care-script" type="text/javascript" src="https://webclient.agent.ai/js/agentai.js"> </script>
         <script>
             AgentAI.initialize({
                 'app_id': 'udvlVlwJLtdfGpuFvelhqw',
