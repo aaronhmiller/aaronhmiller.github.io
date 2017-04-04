@@ -14,7 +14,7 @@
    </script>
    
 Customer ID: <input type='text' name='cid' id='cid' autofocus>
-<button onclick="myFunction()">Login</button>
+<input type="submit" onclick="myFunction()">Login
 
 <script>
 function myFunction() {
