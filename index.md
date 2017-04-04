@@ -13,7 +13,7 @@
        });
    </script>
    
-Customer ID: <input type='text' name='cid' id='cid'>
+Customer ID: <input type='text' name='cid' id='cid' autofocus>
 <button onclick="myFunction()">Login</button>
 
 <script>
