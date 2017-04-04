@@ -12,4 +12,14 @@
            'api_domain': 'agent-demo01.agent.ai'
        });
    </script>
+   
+Customer ID: <input type='text' name='cid' id='cid'>
+<button onclick="myFunction()">Login</button>
+
+<script>
+function myFunction() {
+    var x = document.getElementById('cid').value;
+    AgentAI.login({'customer_id': x});
+}
+</script>
 <!-- agent.ai chat widget end -->
