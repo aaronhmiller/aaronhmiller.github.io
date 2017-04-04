@@ -4,14 +4,6 @@
 <!-- agent.ai chat widget begin -->
    <script id="user-care-script" src="https://webclient.agent.ai/js/agentai.js">
    </script>
-   <script>
-       AgentAI.initialize({
-           'app_id': 'udvlVlwJLtdfGpuFvelhqw',
-           'api_key': 'AHTN65UUJVE4Q0002UPWNPOZ262FC3DAWLS2KJH3XE',
-           'allow_location': true,
-           'api_domain': 'agent-demo01.agent.ai'
-       });
-   </script>
    
 Customer ID: <input type='text' name='cid' id='cid' autofocus>
 <button onclick="myFunction()">Login</button>
@@ -19,7 +11,13 @@ Customer ID: <input type='text' name='cid' id='cid' autofocus>
 <script>
 function myFunction() {
     var x = document.getElementById('cid').value;
-    AgentAI.login({'customer_id': x});
+    AgentAI.initialize({
+           'app_id': 'udvlVlwJLtdfGpuFvelhqw',
+           'api_key': 'AHTN65UUJVE4Q0002UPWNPOZ262FC3DAWLS2KJH3XE',
+           'allow_location': true,
+           'api_domain': 'agent-demo01.agent.ai',
+           'customer_id': x
+    });
 }
 </script>
 <!-- agent.ai chat widget end -->
