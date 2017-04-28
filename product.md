@@ -9,6 +9,6 @@ AgentAI.initialize({
        'allow_location': true,
        'api_domain': 'agent-demo01.agent.ai',
 });
-AgentAI.tags('product_page');
+AgentAI.tags(['product_page']);
 </script>
 <!-- agent.ai chat widget end -->
