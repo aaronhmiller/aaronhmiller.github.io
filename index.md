@@ -1,7 +1,5 @@
 # Welcome to Demoland!
 
-<input type='button' id='hideshow' value='hide/show' onclick="toggle()">
-
 ## Note the Agent.ai Chat Widget in the lower right-hand corner
 <!-- agent.ai chat widget begin -->
    <script id="user-care-script" type="text/javascript" src="https://webclient.agent.ai/js/agentai.js">
@@ -10,6 +8,10 @@
 Customer ID: <input type='text' name='cid' id='cid' autofocus>
 <button onclick="myFunction()">Login</button>
 
+## We can show() or hide() it
+<input type='button' id='hideshow' value='hide/show' onclick="toggle()">
+
+*********************
 <script>
 function myFunction() {
     var x = document.getElementById('cid').value;
