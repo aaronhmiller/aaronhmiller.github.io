@@ -1,7 +1,7 @@
 # Welcome to Demoland!
 
-<div id='content'>Hello World</div>
-<input type='button' id='hideshow' value='hide/show'>
+<input type='button' id='hideshow' value='hide/show' onclick="toggle()">
+
 ## Note the Agent.ai Chat Widget in the lower right-hand corner
 <!-- agent.ai chat widget begin -->
    <script id="user-care-script" type="text/javascript" src="https://webclient.agent.ai/js/agentai.js">
@@ -23,3 +23,9 @@ function myFunction() {
 }
 </script>
 <!-- agent.ai chat widget end -->
+
+<script>
+function toggle() {
+   AgentAI.toggle();
+}
+</script>
