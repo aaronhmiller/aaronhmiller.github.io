@@ -11,6 +11,9 @@ Customer ID: <input type='text' name='cid' id='cid' autofocus>
 ## We can show() or hide() it
 <input type='button' id='hideshow' value='hide/show' onclick="toggle()">
 
+## View the documentation here
+https://doc.agent.ai/developer/web/
+
 <script>
 function myFunction() {
     var x = document.getElementById('cid').value;
