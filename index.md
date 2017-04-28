@@ -1,10 +1,6 @@
 # Welcome to Demoland!
 
 ## Login and note the Agent.ai Chat Widget in the lower right-hand corner
-<!-- agent.ai chat widget begin -->
-   <script id="user-care-script" type="text/javascript" src="https://webclient.agent.ai/js/agentai.js">
-   </script>
-   
 Customer ID: <input type='text' name='cid' id='cid' autofocus>
 <button onclick="myFunction()">Login</button>
 
@@ -14,6 +10,9 @@ Customer ID: <input type='text' name='cid' id='cid' autofocus>
 ## View the documentation here
 [https://doc.agent.ai/developer/web/](https://doc.agent.ai/developer/web/)
 
+<!-- agent.ai chat widget begin -->
+<script id="user-care-script" type="text/javascript" src="https://webclient.agent.ai/js/agentai.js">
+</script>
 <script>
 function myFunction() {
     var x = document.getElementById('cid').value;
