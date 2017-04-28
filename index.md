@@ -12,7 +12,7 @@ Customer ID: <input type='text' name='cid' id='cid' autofocus>
 <input type='button' id='hideshow' value='hide/show' onclick="toggle()">
 
 ## View the documentation here
-https://doc.agent.ai/developer/web/
+[https://doc.agent.ai/developer/web/](https://doc.agent.ai/developer/web/)
 
 <script>
 function myFunction() {
