@@ -24,7 +24,7 @@ function myFunction() {
            'customer_id': x
     });
 }
-AgentAI.tags('index_page');
+AgentAI.tags(['index_page']);
 </script>
 <!-- agent.ai chat widget end -->
 
