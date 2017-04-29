@@ -34,4 +34,4 @@ function toggle() {
 }
 </script>
 
-|this page|[product](https://aaronhmiller.github.io/product)|
+| index |[product](https://aaronhmiller.github.io/product)|
