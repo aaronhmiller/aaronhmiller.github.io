@@ -1,6 +1,6 @@
 # Welcome to Demoland!
 
-## Login and note the Agent.ai Chat Widget in the lower right-hand corner
+## Login & note the Agent.ai Chat Widget in the lower right-hand corner
 Customer ID: <input type='text' name='cid' id='cid' autofocus>
 <button onclick="myFunction()">Login</button>
 
