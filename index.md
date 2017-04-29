@@ -34,4 +34,4 @@ function toggle() {
 }
 </script>
 
-\[this page|[product](https://aaronhmiller.github.io/product)\]
+|[this page|[product](https://aaronhmiller.github.io/product)|
