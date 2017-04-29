@@ -1,5 +1,6 @@
 # Product Page
 
+## This page uses a tag so you know where the chat originated from
 <!-- agent.ai chat widget begin -->
 <script id="user-care-script" type="text/javascript" src="https://webclient.agent.ai/js/agentai.js"></script>
 
