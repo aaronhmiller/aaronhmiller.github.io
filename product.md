@@ -13,4 +13,4 @@ AgentAI.initialize({
 <!-- agent.ai chat widget end -->
 AgentAI.tags(['product_page']);
 </script>
-|[index](https://aaronhmiller.github.io/)| product |
+| [index](https://aaronhmiller.github.io/) | product |
