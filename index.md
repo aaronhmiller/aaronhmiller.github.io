@@ -7,4 +7,7 @@ APIs are simply the most efficient way to run a business. They are the DNA of th
 ## View the documentation here
 [Enterprise docs](https://docs.konghq.com/enterprise/)
 
+## Latest Gist
+<script src="https://gist.github.com/aaronhmiller/d3ea2c840bb09592c13e673aaceb0bb9.js"></script>
+
 | index | [product](https://aaronhmiller.github.io/product) |
