@@ -11,7 +11,7 @@ Attackers of software are advancing nearly as quickly as builders. While we'll n
 OX can inventory and help you fix your source code, your platform, and your entire software pipeline, from code to cloud, continuously and automatically. All you need to do is hook up your source code repositories and you're off to the races! OX will prompty scan and reveal where you are most vulnerable while "de-noising" your issues thanks to our correlation, de-duplication, and rigorous re-prioritization logic. And all of it can be applied to your CI/CD processes and further automated with no-code workflows that instantly share the findings across your ticketing systems, chat ops, email, etc.
 
 ## View the platform info here
-[Platform](https://ox.security)
+[Platform](https://ox.security){:target="_blank"}
 
 ## Latest Gist
 <script src="https://gist.github.com/aaronhmiller/3827e4ebd8aa402fe69984bd4a51b633.js"></script>
