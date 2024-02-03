@@ -12,7 +12,7 @@ OX can inventory and help you fix your source code, your platform, and your enti
 
 ## View the platform info here (and start for FREE)
 [Platform](https://ox.security){:target="_blank"}
-*\<whispering\>for free? yes, sir, for free sir\<\/whispering\>*
+*\<whispering\>for free? yes, sir, for free sir\</whispering\>*
 
 ## Latest Gist
 <script src="https://gist.github.com/aaronhmiller/3827e4ebd8aa402fe69984bd4a51b633.js"></script>
