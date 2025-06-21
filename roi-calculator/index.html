@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chainguard ROI Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .header-image {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 3rem;
+            font-size: 1.25rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .header-image {
+                width: 60px;
+                height: 60px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+                text-align: center;
+            }
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .input-section {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 2rem;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #60a5fa;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            color: #cbd5e1;
+        }
+
+        .input-value {
+            font-weight: 600;
+            color: #a78bfa;
+            font-size: 1rem;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            background: #334155;
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #60a5fa;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            background: #3b82f6;
+            transform: scale(1.2);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #60a5fa;
+            cursor: pointer;
+            border-radius: 50%;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        input[type="range"]::-moz-range-thumb:hover {
+            background: #3b82f6;
+            transform: scale(1.2);
+        }
+
+        .results-section {
+            background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(167, 139, 250, 0.1));
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 2rem;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            grid-column: 1 / -1;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .result-card {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .result-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .result-label {
+            font-size: 0.875rem;
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #60a5fa;
+        }
+
+        .result-label-total {
+            font-size: 0.975rem;
+            color: #000000;
+            margin-bottom: 0.5rem;
+        }
+
+        .total-roi {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .total-roi .result-value {
+            color: white;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-container">
+            <img src="winking-linky.png" alt="Chainguard Logo" class="header-image">
+            <h1>Chainguard ROI Calculator</h1>
+        </div>
+        <p class="subtitle">Business Value Analysis for Container Security</p>
+
+        <div class="calculator-grid">
+            <!-- Engineering Team Section -->
+            <div class="input-section">
+                <h2 class="section-title">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                    Engineering Team
+                </h2>
+                <div class="input-group">
+                    <label class="input-label">
+                        Number of Software Engineers
+                        <span class="input-value" id="engineers-value">50</span>
+                    </label>
+                    <input type="range" id="engineers" min="10" max="500" value="50" step="10">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">
+                        % Working on Container Security
+                        <span class="input-value" id="security-percent-value">5%</span>
+                    </label>
+                    <input type="range" id="security-percent" min="5" max="50" value="5" step="5">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">
+                        Standard Engineer Salary ($K)
+                        <span class="input-value" id="salary-value">$150,000</span>
+                    </label>
+                    <input type="range" id="salary" min="60000" max="350000" value="150000" step="10000">
+                </div>
+            </div>
+
+            <!-- Image Inventory Section -->
+            <div class="input-section">
+                <h2 class="section-title">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                    </svg>
+                    Image Inventory
+                </h2>
+                <div class="input-group">
+                    <label class="input-label">
+                        Total Container Images
+                        <span class="input-value" id="total-images-value">50</span>
+                    </label>
+                    <input type="range" id="total-images" min="10" max="250" value="50" step="5">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">
+                        High Priority Images
+                        <span class="input-value" id="high-priority-value">10</span>
+                    </label>
+                    <input type="range" id="high-priority" min="5" max="250" value="10" step="5">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">
+                        New Images per Year
+                        <span class="input-value" id="new-images-value">20</span>
+                    </label>
+                    <input type="range" id="new-images" min="5" max="100" value="20" step="5">
+                </div>
+            </div>
+
+            <!-- CVE Remediation Section -->
+            <div class="input-section">
+                <h2 class="section-title">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                    CVE Remediation
+                </h2>
+                <div class="input-group">
+                    <label class="input-label">
+                        Current CVE Backlog Count
+                        <span class="input-value" id="cve-backlog-value">200</span>
+                    </label>
+                    <input type="range" id="cve-backlog" min="10" max="1000" value="200" step="10">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">
+                        Average Hours per CVE Decision (Assessment or Fix)
+                        <span class="input-value" id="hours-per-cve-value">4</span>
+                    </label>
+                    <input type="range" id="hours-per-cve" min="1" max="10" value="4" step="0.5">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">
+                        Monthly CVEs Handled
+                        <span class="input-value" id="monthly-cves-value">50</span>
+                    </label>
+                    <input type="range" id="monthly-cves" min="10" max="200" value="50" step="10">
+                </div>
+            </div>
+
+            <!-- Business Impact Section -->
+            <div class="input-section">
+                <h2 class="section-title">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    Business Impact
+                </h2>
+                <div class="input-group">
+                    <label class="input-label">
+                        Annual Revenue ($M)
+                        <span class="input-value" id="annual-revenue-value">$220M</span>
+                    </label>
+                    <input type="range" id="annual-revenue" min="0" max="1000" value="220" step="5">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">
+                        Win Rate Improvement (%)
+                        <span class="input-value" id="win-rate-value">5%</span>
+                    </label>
+                    <input type="range" id="win-rate" min="1" max="20" value="5" step="1">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">
+                        Average Breach Cost ($M)
+                        <span class="input-value" id="breach-cost-value">$4.5M</span>
+                    </label>
+                    <input type="range" id="breach-cost" min="1" max="10" value="4.5" step="0.5">
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section">
+                <h2 class="section-title">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    </svg>
+                    ROI Analysis Results
+                </h2>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-label">Annual Engineering Cost Savings</div>
+                        <div class="result-value" id="engineering-savings">$0</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">CVE Remediation Savings</div>
+                        <div class="result-value" id="cve-savings">$0</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Revenue Impact</div>
+                        <div class="result-value" id="revenue-impact">$0</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Risk Reduction Value</div>
+                        <div class="result-value" id="risk-reduction">$0</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Time Saved (Hours/Year)</div>
+                        <div class="result-value" id="time-saved">0</div>
+                    </div>
+                    <div class="result-card total-roi">
+                        <div class="result-label-total">Total Annual ROI</div>
+                        <div class="result-value" id="total-roi">$0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get all input elements
+        const inputs = {
+            engineers: document.getElementById('engineers'),
+            securityPercent: document.getElementById('security-percent'),
+            salary: document.getElementById('salary'),
+            totalImages: document.getElementById('total-images'),
+            highPriority: document.getElementById('high-priority'),
+            newImages: document.getElementById('new-images'),
+            cveBacklog: document.getElementById('cve-backlog'),
+            hoursPerCve: document.getElementById('hours-per-cve'),
+            monthlyCves: document.getElementById('monthly-cves'),
+            annualRevenue: document.getElementById('annual-revenue'),
+            winRate: document.getElementById('win-rate'),
+            breachCost: document.getElementById('breach-cost')
+        };
+
+        // Get all value display elements
+        const displays = {
+            engineers: document.getElementById('engineers-value'),
+            securityPercent: document.getElementById('security-percent-value'),
+            salary: document.getElementById('salary-value'),
+            totalImages: document.getElementById('total-images-value'),
+            highPriority: document.getElementById('high-priority-value'),
+            newImages: document.getElementById('new-images-value'),
+            cveBacklog: document.getElementById('cve-backlog-value'),
+            hoursPerCve: document.getElementById('hours-per-cve-value'),
+            monthlyCves: document.getElementById('monthly-cves-value'),
+            annualRevenue: document.getElementById('annual-revenue-value'),
+            winRate: document.getElementById('win-rate-value'),
+            breachCost: document.getElementById('breach-cost-value')
+        };
+
+        // Get result elements
+        const results = {
+            engineeringSavings: document.getElementById('engineering-savings'),
+            cveSavings: document.getElementById('cve-savings'),
+            revenueImpact: document.getElementById('revenue-impact'),
+            riskReduction: document.getElementById('risk-reduction'),
+            timeSaved: document.getElementById('time-saved'),
+            totalRoi: document.getElementById('total-roi')
+        };
+
+        // Format currency
+        function formatCurrency(value) {
+            if (value >= 1000000) {
+                return '$' + (value / 1000000).toFixed(1) + 'M';
+            } else if (value >= 1000) {
+                return '$' + (value / 1000).toFixed(0) + 'K';
+            }
+            return '$' + value.toFixed(0);
+        }
+
+        // Format number
+        function formatNumber(value) {
+            return value.toLocaleString();
+        }
+
+        // Update display values
+        function updateDisplays() {
+            displays.engineers.textContent = inputs.engineers.value;
+            displays.securityPercent.textContent = inputs.securityPercent.value + '%';
+            displays.salary.textContent = formatCurrency(parseFloat(inputs.salary.value));
+            displays.totalImages.textContent = inputs.totalImages.value;
+            displays.highPriority.textContent = inputs.highPriority.value;
+            displays.newImages.textContent = inputs.newImages.value;
+            displays.cveBacklog.textContent = inputs.cveBacklog.value;
+            displays.hoursPerCve.textContent = inputs.hoursPerCve.value;
+            displays.monthlyCves.textContent = inputs.monthlyCves.value;
+            displays.annualRevenue.textContent = formatCurrency(parseFloat(inputs.annualRevenue.value) * 1000000);
+            displays.winRate.textContent = inputs.winRate.value + '%';
+            displays.breachCost.textContent = formatCurrency(parseFloat(inputs.breachCost.value) * 1000000);
+        }
+
+        // Calculate ROI
+        function calculateROI() {
+            // Get values
+            const engineers = parseFloat(inputs.engineers.value);
+            const securityPercent = parseFloat(inputs.securityPercent.value) / 100;
+            const salary = parseFloat(inputs.salary.value);
+            const totalImages = parseFloat(inputs.totalImages.value);
+            const highPriority = parseFloat(inputs.highPriority.value);
+            const newImages = parseFloat(inputs.newImages.value);
+            const cveBacklog = parseFloat(inputs.cveBacklog.value);
+            const hoursPerCve = parseFloat(inputs.hoursPerCve.value);
+            const monthlyCves = parseFloat(inputs.monthlyCves.value);
+            const annualRevenue = parseFloat(inputs.annualRevenue.value) * 1000000;
+            const winRate = parseFloat(inputs.winRate.value) / 100;
+            const breachCost = parseFloat(inputs.breachCost.value) * 1000000;
+
+            // Calculate engineering cost savings
+            const securityEngineers = engineers * securityPercent;
+            const engineeringHourlyRate = salary / (40 * 52); // 40 hours/week, 52 weeks/year
+            const imageHardeningHours = (highPriority * 8) + ((totalImages - highPriority) * 4); // 8 hours for high priority, 4 for others
+            const annualImageHours = newImages * 6; // 6 hours average for new images
+            const engineeringSavings = (imageHardeningHours + annualImageHours) * securityEngineers * engineeringHourlyRate * 0.7; // 70% reduction with Chainguard
+
+            // Calculate CVE remediation savings
+            const annualCveHours = (cveBacklog + (monthlyCves * 12)) * hoursPerCve;
+            const cveSavings = annualCveHours * engineeringHourlyRate * 0.9; // 90% reduction with Chainguard
+
+            // Calculate revenue impact
+            const revenueImpact = annualRevenue * winRate * 0.2; // 20% of deals influenced by security posture
+
+            // Calculate risk reduction value
+            const breachProbability = 0.03; // 3% annual breach probability
+            const riskReduction = breachCost * breachProbability * 0.8; // 80% risk reduction
+
+            // Calculate time saved
+            const timeSaved = (imageHardeningHours + annualImageHours + annualCveHours) * 0.8;
+
+            // Calculate total ROI
+            const totalRoi = engineeringSavings + cveSavings + revenueImpact + riskReduction;
+
+            // Update results
+            results.engineeringSavings.textContent = formatCurrency(engineeringSavings);
+            results.cveSavings.textContent = formatCurrency(cveSavings);
+            results.revenueImpact.textContent = formatCurrency(revenueImpact);
+            results.riskReduction.textContent = formatCurrency(riskReduction);
+            results.timeSaved.textContent = formatNumber(Math.round(timeSaved));
+            results.totalRoi.textContent = formatCurrency(totalRoi);
+        }
+
+        // Add event listeners
+        Object.values(inputs).forEach(input => {
+            input.addEventListener('input', () => {
+                updateDisplays();
+                calculateROI();
+            });
+        });
+
+        // Initial calculation
+        updateDisplays();
+        calculateROI();
+    </script>
+</body>
+</html>
